@@ -4,6 +4,8 @@ Hiro's microbots from Big Hero 6, in the browser with Three.js. Two scenes: the 
 
 This is v1 of a Vision Pro piece. The laptop version comes first so the motion is right before hand tracking goes in.
 
+## How it moves
+
 Built from three sources, all read: Disney's SIGGRAPH 2015 talk (Byun et al., "Procedural Animation Technology behind Microbots in Big Hero 6"), the SideFX case study, and frame-by-frame reads of the showcase clip.
 
 - The bot is Caleb's Microbot.STL (38.1 mm, the 1.5 inches Disney gives), decimated in Blender to 216 triangles for the showcase and 68 for the swarm.
@@ -20,9 +22,6 @@ cd ~/code/personal/microbots && python3 -m http.server 5173
 ```
 
 Swarm at http://localhost:5173 (keys 1 to 5, A autoplay, H hide UI). Showcase at http://localhost:5173/showcase.html (Space adds a bot, M morphs box and hand).
-
-t walked.
-- Tentacles walk a smooth curve in fixed steps snapped to the 26 lattice directions, live, every frame.
 
 ## Next
 
