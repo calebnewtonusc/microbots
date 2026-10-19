@@ -20,7 +20,7 @@
     </script>
   </head>
   <body
-    class="m-0 overflow-hidden bg-[#0a0b0d] font-['Space_Grotesk'] text-neutral-200 antialiased"
+    class="m-0 overflow-hidden bg-[#b7c6d8] font-['Space_Grotesk'] text-neutral-900 antialiased"
   >
     <canvas id="stage" class="block h-screen w-screen"></canvas>
 
@@ -29,13 +29,14 @@
       class="pointer-events-none fixed inset-0 transition-opacity duration-300"
     >
       <div class="absolute left-4 top-4 sm:left-6 sm:top-6">
-        <div class="text-xs uppercase tracking-[0.3em] text-neutral-500">
+        <div class="text-xs uppercase tracking-[0.3em] text-neutral-600">
           Neurotransmitter link
         </div>
-        <div class="mt-1 text-lg font-semibold tracking-wide text-neutral-100">
+        <div class="mt-1 text-lg font-semibold tracking-wide text-neutral-950">
           Microbots
         </div>
-        <div id="stats" class="mt-1 text-xs text-neutral-500"></div>
+        <div id="stats" class="mt-1 text-xs text-neutral-600"></div>
+        <a href="./showcase.html" class="pointer-events-auto mt-3 inline-block rounded-xl border border-black/10 bg-white/40 px-3 py-1.5 text-sm text-neutral-900 no-underline backdrop-blur-md transition-colors duration-150 hover:bg-white/70">Showcase: +1 bot</a>
       </div>
 
       <div
@@ -43,14 +44,14 @@
       >
         <div
           id="modes"
-          class="pointer-events-auto flex flex-wrap justify-center gap-1 rounded-2xl border border-white/10 bg-white/[0.04] p-1 backdrop-blur-md"
+          class="pointer-events-auto flex flex-wrap justify-center gap-1 rounded-2xl border border-black/10 bg-white/40 p-1 backdrop-blur-md"
         ></div>
       </div>
 
       <div
-        class="absolute bottom-4 right-4 hidden text-right text-xs text-neutral-500 sm:bottom-6 sm:right-6 md:block"
+        class="absolute bottom-4 right-4 hidden text-right text-xs text-neutral-600 sm:bottom-6 sm:right-6 md:block"
       >
-        <div>1-6 shapes, A autoplay, H hide UI</div>
+        <div>1-5 shapes, A autoplay, H hide UI</div>
         <div>Tentacles follow your cursor</div>
       </div>
     </div>

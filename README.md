@@ -1,8 +1,17 @@
 # Microbots
 
-Hiro's microbots from Big Hero 6, in the browser with Three.js. 6,000 instanced bots build towers, a hand, an orb and a curling wave out of a swarm lake, and five tentacles chase the cursor.
+Hiro's microbots from Big Hero 6, in the browser with Three.js. Two scenes: the Yokai swarm (96,000 bots in daylight building a tower, a hand, a wave and cursor-chasing tentacles out of a tangle of bundles) and the SFIT showcase (22,000 bots in a lattice box that re-forms when you flick one more bot in).
 
 This is v1 of a Vision Pro piece. The laptop version comes first so the motion is right before hand tracking goes in.
+
+Built from three sources, all read: Disney's SIGGRAPH 2015 talk (Byun et al., "Procedural Animation Technology behind Microbots in Big Hero 6"), the SideFX case study, and frame-by-frame reads of the showcase clip.
+
+- The bot is Caleb's Microbot.STL (38.1 mm, the 1.5 inches Disney gives), decimated in Blender to 216 triangles for the showcase and 68 for the swarm.
+- Swarm structures are bundles on 45 degree circuit-board paths. Each lane in a bundle is the lane before it extruded one spacing out, so a jog born in one lane carries into every lane after it: the paper's history-dependent generator.
+- Flipping follows the paper's cycle: the bottom layer is static, and top-edge bots lift, pass over pivoting on their front tip, and put down one bot length ahead. Interior bots slide, which SideFX says Disney did because walking everything read as noise.
+- Showcase +1 re-solves the lattice for N + 1 bots. A wave runs out from where the bot lands and the box re-forms behind it into the next pattern (fine hex, bold open hex, triangles, diamonds), timed from the clip at 0:22.
+- The hand is real 3D: a wrist that flares into the base, a rounded palm, fingers as bending phalanx cylinders, and a webbed thumb, all with the lattice wrapped around them.
+- Bot placement runs in the vertex shader. The CPU only rebuilds center lines and lattice slots.
 
 ## Run it
 
@@ -10,17 +19,9 @@ This is v1 of a Vision Pro piece. The laptop version comes first so the motion i
 cd ~/code/personal/microbots && python3 -m http.server 5173
 ```
 
-Open http://localhost:5173. Keys 1 to 6 pick a mode, A toggles autoplay, H hides the UI for recording. `?n=10000` changes the bot count, `?auto=0` starts paused.
+Swarm at http://localhost:5173 (keys 1 to 5, A autoplay, H hide UI). Showcase at http://localhost:5173/showcase.html (Space adds a bot, M morphs box and hand).
 
-## How it moves
-
-It follows what Disney's effects team described in the SideFX Big Hero 6 case study: no flocking and no fluid sim.
-
-- Every shape is voxelized into exactly N lattice slots. Surplus comes out of the hidden interior, and a deficit pools around the base as a two-layer lake.
-- Old and new slots are paired by recursive equal-count bisection, so each region of the old shape feeds the matching region of the new one.
-- Bots travel on circuit-board paths: down to a floor lane, an octilinear run, then up, with every corner beveled to 45 degrees. Nearby bots share a route pattern, so they move in bundles.
-- Shapes grow from the ground up. Low slots fill first.
-- Interior bots slide. Only bots bound for the visible edge run the end-over-end flip, which is Disney's fix for a swarm that looked noisy when every bot walked.
+t walked.
 - Tentacles walk a smooth curve in fixed steps snapped to the 26 lattice directions, live, every frame.
 
 ## Next
