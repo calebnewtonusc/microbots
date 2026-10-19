@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Microbots</title>
+    <script src="https://cdn.tailwindcss.com/3.4.10"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body
+    class="m-0 overflow-hidden bg-[#0a0b0d] font-['Space_Grotesk'] text-neutral-200 antialiased"
+  >
+    <canvas id="stage" class="block h-screen w-screen"></canvas>
+
+    <div
+      id="ui"
+      class="pointer-events-none fixed inset-0 transition-opacity duration-300"
+    >
+      <div class="absolute left-4 top-4 sm:left-6 sm:top-6">
+        <div class="text-xs uppercase tracking-[0.3em] text-neutral-500">
+          Neurotransmitter link
+        </div>
+        <div class="mt-1 text-lg font-semibold tracking-wide text-neutral-100">
+          Microbots
+        </div>
+        <div id="stats" class="mt-1 text-xs text-neutral-500"></div>
+      </div>
+
+      <div
+        class="absolute bottom-4 left-0 right-0 flex justify-center px-4 sm:bottom-6"
+      >
+        <div
+          id="modes"
+          class="pointer-events-auto flex flex-wrap justify-center gap-1 rounded-2xl border border-white/10 bg-white/[0.04] p-1 backdrop-blur-md"
+        ></div>
+      </div>
+
+      <div
+        class="absolute bottom-4 right-4 hidden text-right text-xs text-neutral-500 sm:bottom-6 sm:right-6 md:block"
+      >
+        <div>1-6 shapes, A autoplay, H hide UI</div>
+        <div>Tentacles follow your cursor</div>
+      </div>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
