@@ -15,6 +15,10 @@ Built from three sources, all read: Disney's SIGGRAPH 2015 talk (Byun et al., "P
 - The hand is real 3D: a wrist that flares into the base, a rounded palm, fingers as bending phalanx cylinders, and a webbed thumb, all with the lattice wrapped around them.
 - Bot placement runs in the vertex shader. The CPU only rebuilds center lines and lattice slots.
 
+## Live
+
+https://microbots.up.railway.app (showcase at /showcase.html). Railway project `microbots`, deployed with `railway up`, not GitHub-linked, so redeploy by hand after edits.
+
 ## Run it
 
 ```bash
