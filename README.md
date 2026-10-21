@@ -19,6 +19,17 @@ Built from three sources, all read: Disney's SIGGRAPH 2015 talk (Byun et al., "P
 
 https://microbots.up.railway.app (showcase at /showcase.html). Railway project `microbots`, deployed with `railway up`, not GitHub-linked, so redeploy by hand after edits.
 
+## Vision Pro
+
+Open https://microbots.up.railway.app in Safari on the Vision Pro and tap Enter Vision Pro. It's WebXR immersive-vr, so there's no app to build or install.
+
+- Bots are their real size, 1.5 inches, and the swarm sits on your floor about 1.4 m in front of you. Add `?scale=2` to the URL for a world twice as big.
+- Swarm: pinch to go to the next shape. In Tentacles they reach for your index fingertip.
+- Showcase: right hand pinch flicks one more bot in, left hand pinch morphs between the box and the hand.
+- `?emulate` loads Meta's IWER runtime so the immersive path runs in a desktop browser for testing.
+
+Not tried on a real headset yet. The swarm is 96,000 bots with 4096 shadows in stereo, so if it stutters, `?strands=40` halves the count.
+
 ## Run it
 
 ```bash

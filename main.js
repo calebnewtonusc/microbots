@@ -10,6 +10,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import { loadBotGeometry } from "./bot.js";
+import { setupXR } from "./xr.js";
 
 const params = new URLSearchParams(location.search);
 const STR = clampInt(params.get("strands"), 80, 16, 160); // ribbons
@@ -723,7 +724,8 @@ function frame() {
   }
   stepRibbons(dt, time);
 
-  controls.update();
+  xr.update();
+  if (!renderer.xr.isPresenting) controls.update();
   renderer.render(scene, camera);
 
   frames++;
@@ -733,6 +735,31 @@ function frame() {
     frames = 0;
     fpsT = 0;
   }
-  requestAnimationFrame(frame);
 }
-requestAnimationFrame(frame);
+
+// Pinch moves to the next shape. In tentacle mode they chase the nearest
+// index fingertip, with the same bounds the cursor gets.
+const xr = await setupXR({
+  renderer,
+  scene,
+  camera,
+  standAt: [0, 0, 20],
+  onPinch: () => {
+    auto = false;
+    const at = AUTO_ORDER.indexOf(mode);
+    select(AUTO_ORDER[(at + 1) % AUTO_ORDER.length]);
+  },
+  onTips: (tips) => {
+    const t = tips[0];
+    pointer.target.set(t.x, clamp(t.y, 2, 20), t.z);
+    const h = Math.hypot(t.x, t.z);
+    if (h > 18) {
+      pointer.target.x *= 18 / h;
+      pointer.target.z *= 18 / h;
+    }
+    pointer.last = clock.elapsedTime;
+  },
+  onStart: () => (controls.autoRotate = false),
+  onEnd: () => (controls.autoRotate = true),
+});
+renderer.setAnimationLoop(frame);

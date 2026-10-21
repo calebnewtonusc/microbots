@@ -10,6 +10,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import { loadBotGeometry } from "./bot.js";
+import { setupXR } from "./xr.js";
 
 const params = new URLSearchParams(location.search);
 let N = Math.max(
@@ -872,8 +873,16 @@ function frame() {
     tEnd = Infinity;
     next();
   }
-  controls.update();
+  if (!renderer.xr.isPresenting) controls.update();
   renderer.render(scene, camera);
-  requestAnimationFrame(frame);
 }
-requestAnimationFrame(frame);
+
+// Right hand pinch flicks one more bot in, left hand pinch morphs box and hand.
+await setupXR({
+  renderer,
+  scene,
+  camera,
+  standAt: [-0.5, 0, 16],
+  onPinch: (handedness) => (handedness === "left" ? morph() : addOne()),
+});
+renderer.setAnimationLoop(frame);
