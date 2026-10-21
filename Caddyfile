@@ -1,0 +1,14 @@
+# Served by Railway's Railpack static build. no-cache makes browsers revalidate
+# against the etag on every load, so a redeploy shows up on the next refresh:
+# without it the 10/20 redeploy kept serving the old main.js from cache.
+{
+	admin off
+	persist_config off
+	auto_https off
+}
+
+:{$PORT:80} {
+	root * .
+	header Cache-Control "no-cache"
+	file_server
+}
